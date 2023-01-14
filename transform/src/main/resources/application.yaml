@@ -1,0 +1,20 @@
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input-channel-1:
+          destination: message
+      kafka:
+        streams:
+          binder:
+            applicationId: transformtable
+            brokers: localhost:9092
+            configuration:
+              commit.interval.ms: 10000
+              state.dir: state-store
+              processing.guarantee: exactly_once_v2
+          bindings:
+            input-channel-1:
+              consumer:
+                materializedAs: message-input-store
